@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: add_task/add_task_subtasks.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: add_task/add_task_subtasks.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Shows or hides the icons subtasks container based on the value of the task subtask input field.
+ *
+ * @return {void} This function does not return anything.
+ */
+function showIconsSubtasks() {
+  if (document.getElementById("taskSubtask").value !== "") {
+    document.getElementById("iconsSubtasksContainer").classList.remove("d_none");
+  } else {
+    document.getElementById("iconsSubtasksContainer").classList.add("d_none");
+  }
+}
+
+/**
+ * Clears the subtask by resetting the taskSubtask value, hiding icons, and stopping event propagation.
+ *
+ * @return {void} This function does not return anything.
+ */
+function clearSubtask() {
+  document.getElementById("taskSubtask").value = "";
+  document.getElementById("iconsSubtasksContainer").classList.add("d_none");
+  removeBorderColorBlue();
+  event.stopPropagation();
+}
+
+/**
+ * Adds a subtask to the list of subtasks.
+ *
+ * @param {string} taskSubtask - The value of the task subtask input field.
+ * @return {void} This function does not return anything.
+ */
+function addSubtask() {
+  if (document.getElementById("taskSubtask").value) {
+    let nameSubtask = document.getElementById("taskSubtask").value;
+    let statusSubtask = "inProgress";
+    let subtask = {
+      nameSubtask: nameSubtask,
+      statusSubtask: statusSubtask,
+    };
+    subtasks.push(subtask);
+    renewSubtasks();
+  }
+  removeBorderColorBlue();
+  event.stopPropagation();
+}
+
+/**
+ * Renews the subtasks by clearing the existing subtasks and rendering them again.
+ *
+ * @return {void} This function does not return anything.
+ */
+function renewSubtasks() {
+  clearSubtask();
+  renderSubtasks();
+}
+
+/**
+ * Renders the subtasks in the "subtasksRenderContainer" element.
+ *
+ * @return {void} This function does not return anything.
+ */
+function renderSubtasks() {
+  document.getElementById("subtasksRenderContainer").innerHTML = "";
+  for (let i = 0; i &lt; subtasks.length; i++) {
+    let subtaskName = subtasks[i].nameSubtask;
+    document.getElementById("subtasksRenderContainer").innerHTML += generateSubtasks(i, subtaskName);
+  }
+}
+
+/**
+ * Generates the HTML code for a subtask element.
+ *
+ * @param {number} i - The index of the subtask.
+ * @param {string} subtaskName - The name of the subtask.
+ * @return {string} The generated HTML code for the subtask element.
+ */
+function generateSubtasks(i, subtaskName) {
+  return `&lt;div id="renderedSubtask${i}" onclick="makeRenderedSubtasksEditable(${i})" onmouseover="showPenAndTrash(${i})" onmouseout="hidePenAndTrash(${i})" class="rendered_subtask" contenteditable="true">
+    &lt;div class="span_container ">
+      &lt;span class="rendered_subtasks_span">&amp;#x2022&lt;/span>
+      &lt;span id="subtasName${i}"> ${subtaskName}&lt;/span>
+    &lt;/div>
+    &lt;div id="containerPenAndTrash${i}" class="d_none">
+      &lt;img onclick="makeRenderedSubtasksEditable(${i})" id="pen${i}" src="../assets/img/icons/subtasks_pen.png" alt="">
+      &lt;img src="../assets/img/icons/subtask_line.png" alt="">
+      &lt;img onclick="deleteSubtask(${i})" id="trash${i}" src="../assets/img/icons/subtask_trash.png" alt="">
+    &lt;/div>
+    &lt;div id="containerTrashAndCheck${i}" class="d_none">
+      &lt;img onclick="deleteRenderedSubtask(${i})" src="../assets/img/icons/subtask_trash.png" alt="">
+      &lt;img src="../assets/img/icons/subtask_line.png" alt="">
+      &lt;img onclick="overwriteSubtask(${i})" src="../assets/img/icons/subtask_check.png" alt="">
+    &lt;/div>
+  &lt;/div>`;
+}
+
+/**
+ * Shows the pen and trash container for a specific subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @return {void} This function does not return anything.
+ */
+function showPenAndTrash(i) {
+  document.getElementById(`containerPenAndTrash${i}`).classList.remove("d_none");
+}
+
+/**
+ * Hides the pen and trash container for a specific subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @return {void} This function does not return anything.
+ */
+function hidePenAndTrash(i) {
+  document.getElementById(`containerPenAndTrash${i}`).classList.add("d_none");
+}
+
+/**
+ * Deletes a subtask from the subtasks array at the specified index and re-renders the subtasks.
+ *
+ * @param {number} i - The index of the subtask to be deleted.
+ * @return {void} This function does not return anything.
+ */
+function deleteSubtask(i) {
+  subtasks.splice(i, 1);
+  renderSubtasks();
+  event.stopPropagation();
+}
+
+/**
+ * Makes the rendered subtask at the specified index editable by setting its "contenteditable" attribute to true.
+ * Also, sets an empty onmouseover event handler for the rendered subtask.
+ * Hides the pen and trash containers for the subtask.
+ * Shows the trash and check containers for the subtask.
+ *
+ * @param {number} i - The index of the rendered subtask to make editable.
+ * @return {void} This function does not return anything.
+ */
+function makeRenderedSubtasksEditable(i) {
+  document.getElementById(`renderedSubtask${i}`).setAttribute("contenteditable", true);
+  document.getElementById(`renderedSubtask${i}`).onmouseover = function () {};
+  hidePenAndTrash(i);
+  showTrashAndCheck(i);
+}
+
+/**
+ * Displays the trash and check containers for the specified subtask.
+ *
+ * @param {number} i - The index of the subtask.
+ * @return {void} This function does not return anything.
+ */
+function showTrashAndCheck(i) {
+  document.getElementById(`containerTrashAndCheck${i}`).classList.remove("d_none");
+}
+
+/**
+ * Deletes a rendered subtask and stops the event propagation.
+ *
+ * @param {number} i - The index of the subtask to be deleted.
+ * @return {void} This function does not return anything.
+ */
+function deleteRenderedSubtask(i) {
+  deleteSubtask(i);
+  event.stopPropagation();
+}
+
+/**
+ * Updates the name of a subtask at the specified index and re-renders the subtasks.
+ *
+ * @param {number} i - The index of the subtask to be updated.
+ * @return {void} This function does not return anything.
+ */
+function overwriteSubtask(i) {
+  let newValueSubtaskName = document.getElementById(`subtasName${i}`).innerText;
+  subtasks[i].nameSubtask = newValueSubtaskName;
+  renderSubtasks();
+  document.getElementById(`containerTrashAndCheck${i}`).classList.add("d_none");
+  event.stopPropagation();
+  document.getElementById(`containerPenAndTrash${i}`).classList.add("d_none");
+  event.stopPropagation();
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#acceptPolicy">acceptPolicy</a></li><li><a href="global.html#addBorderColorBlue">addBorderColorBlue</a></li><li><a href="global.html#addCheckboxImage">addCheckboxImage</a></li><li><a href="global.html#addContact">addContact</a></li><li><a href="global.html#addSubtask">addSubtask</a></li><li><a href="global.html#addTask">addTask</a></li><li><a href="global.html#addUser">addUser</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#borderRedIfCategoryEmpty">borderRedIfCategoryEmpty</a></li><li><a href="global.html#borderRedIfCategoryEmptyEdit">borderRedIfCategoryEmptyEdit</a></li><li><a href="global.html#borderRedIfDateEmpty">borderRedIfDateEmpty</a></li><li><a href="global.html#borderRedIfDateEmptyEdit">borderRedIfDateEmptyEdit</a></li><li><a href="global.html#borderRedIfTitleEmpty">borderRedIfTitleEmpty</a></li><li><a href="global.html#borderRedIfTitleEmptyEdit">borderRedIfTitleEmptyEdit</a></li><li><a href="global.html#calculateSubtaskProgress">calculateSubtaskProgress</a></li><li><a href="global.html#changeButtonsInTaskform">changeButtonsInTaskform</a></li><li><a href="global.html#changeIconDoneWhite">changeIconDoneWhite</a></li><li><a href="global.html#changeIconTDoneBack">changeIconTDoneBack</a></li><li><a href="global.html#changeIconTodoBack">changeIconTodoBack</a></li><li><a href="global.html#changeIconTodoWhite">changeIconTodoWhite</a></li><li><a href="global.html#checkBox">checkBox</a></li><li><a href="global.html#checkIfContactAssigned">checkIfContactAssigned</a></li><li><a href="global.html#checkIfInputHasValue">checkIfInputHasValue</a></li><li><a href="global.html#checkRequiredFields">checkRequiredFields</a></li><li><a href="global.html#checkRequiredFieldsEdit">checkRequiredFieldsEdit</a></li><li><a href="global.html#checkSubtaskStatus">checkSubtaskStatus</a></li><li><a href="global.html#clearArrays">clearArrays</a></li><li><a href="global.html#clearForm">clearForm</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#closeAddContact">closeAddContact</a></li><li><a href="global.html#closeEditContact">closeEditContact</a></li><li><a href="global.html#closeModal">closeModal</a></li><li><a href="global.html#closeModalDetails">closeModalDetails</a></li><li><a href="global.html#createColors">createColors</a></li><li><a href="global.html#createContactColor">createContactColor</a></li><li><a href="global.html#createContactInitials">createContactInitials</a></li><li><a href="global.html#createContactObject">createContactObject</a></li><li><a href="global.html#createInitials">createInitials</a></li><li><a href="global.html#createStartingLetters">createStartingLetters</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#createTaskDetailsHtml">createTaskDetailsHtml</a></li><li><a href="global.html#deleteContact">deleteContact</a></li><li><a href="global.html#deleteContactFromTasks">deleteContactFromTasks</a></li><li><a href="global.html#deleteContactInOverview">deleteContactInOverview</a></li><li><a href="global.html#deleteRenderedSubtask">deleteRenderedSubtask</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#deleteTask">deleteTask</a></li><li><a href="global.html#disOrEnableButton">disOrEnableButton</a></li><li><a href="global.html#disOrEnableLogInBtn">disOrEnableLogInBtn</a></li><li><a href="global.html#disOrEnableSignUpBtn">disOrEnableSignUpBtn</a></li><li><a href="global.html#displayAssignedContacts">displayAssignedContacts</a></li><li><a href="global.html#displayContactDetails">displayContactDetails</a></li><li><a href="global.html#displayContacts">displayContacts</a></li><li><a href="global.html#displayGreeting">displayGreeting</a></li><li><a href="global.html#displayStartingLetters">displayStartingLetters</a></li><li><a href="global.html#displaySubstasks">displaySubstasks</a></li><li><a href="global.html#dragCardHighlight">dragCardHighlight</a></li><li><a href="global.html#editContact">editContact</a></li><li><a href="global.html#emptyCheckboxImage">emptyCheckboxImage</a></li><li><a href="global.html#fillCheckboxImage">fillCheckboxImage</a></li><li><a href="global.html#fillTaskFields">fillTaskFields</a></li><li><a href="global.html#findEarliestDate">findEarliestDate</a></li><li><a href="global.html#findMatchingTitles">findMatchingTitles</a></li><li><a href="global.html#findUser">findUser</a></li><li><a href="global.html#formatDate">formatDate</a></li><li><a href="global.html#generateCategories">generateCategories</a></li><li><a href="global.html#generateContactInformation">generateContactInformation</a></li><li><a href="global.html#generateContactToAssign">generateContactToAssign</a></li><li><a href="global.html#generateContactUnderStartingLetter">generateContactUnderStartingLetter</a></li><li><a href="global.html#generateContacts">generateContacts</a></li><li><a href="global.html#generateEmptyHTML">generateEmptyHTML</a></li><li><a href="global.html#generateInitialCircles">generateInitialCircles</a></li><li><a href="global.html#generateModalContent">generateModalContent</a></li><li><a href="global.html#generatePrioImage">generatePrioImage</a></li><li><a href="global.html#generateRandomNumber">generateRandomNumber</a></li><li><a href="global.html#generateSubtasks">generateSubtasks</a></li><li><a href="global.html#generateTodoHTML">generateTodoHTML</a></li><li><a href="global.html#getItem">getItem</a></li><li><a href="global.html#hidePenAndTrash">hidePenAndTrash</a></li><li><a href="global.html#highlight">highlight</a></li><li><a href="global.html#highlightAreas">highlightAreas</a></li><li><a href="global.html#includeHTML">includeHTML</a></li><li><a href="global.html#init">init</a></li><li><a href="global.html#initBoard">initBoard</a></li><li><a href="global.html#initContacts">initContacts</a></li><li><a href="global.html#initSummary">initSummary</a></li><li><a href="global.html#initUser">initUser</a></li><li><a href="global.html#loadAllTasks">loadAllTasks</a></li><li><a href="global.html#loadAllTasksContacts">loadAllTasksContacts</a></li><li><a href="global.html#loadAllTasksSummary">loadAllTasksSummary</a></li><li><a href="global.html#loadAllUsers">loadAllUsers</a></li><li><a href="global.html#loadContacts">loadContacts</a></li><li><a href="global.html#loadRememberMe">loadRememberMe</a></li><li><a href="global.html#loadUserInitials">loadUserInitials</a></li><li><a href="global.html#loadUserName">loadUserName</a></li><li><a href="global.html#logOut">logOut</a></li><li><a href="global.html#logSidebarLink">logSidebarLink</a></li><li><a href="global.html#login">login</a></li><li><a href="global.html#makeIconClearButtonBright">makeIconClearButtonBright</a></li><li><a href="global.html#makeIconClearButtonDark">makeIconClearButtonDark</a></li><li><a href="global.html#makeRenderedSubtasksEditable">makeRenderedSubtasksEditable</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#openAddContact">openAddContact</a></li><li><a href="global.html#openAddTask">openAddTask</a></li><li><a href="global.html#openAddTaskAndSetStatus">openAddTaskAndSetStatus</a></li><li><a href="global.html#openEditContact">openEditContact</a></li><li><a href="global.html#openEditDeleteMenu">openEditDeleteMenu</a></li><li><a href="global.html#openEditTask">openEditTask</a></li><li><a href="global.html#openTaskDetails">openTaskDetails</a></li><li><a href="global.html#overwriteSubtask">overwriteSubtask</a></li><li><a href="global.html#pushAssignedContacts">pushAssignedContacts</a></li><li><a href="global.html#pushMatchingTodos">pushMatchingTodos</a></li><li><a href="global.html#pushTask">pushTask</a></li><li><a href="global.html#pushUsers">pushUsers</a></li><li><a href="global.html#redirectToBoard">redirectToBoard</a></li><li><a href="global.html#redirectToLogin">redirectToLogin</a></li><li><a href="global.html#redirectToSignUp">redirectToSignUp</a></li><li><a href="global.html#redirectToSummary">redirectToSummary</a></li><li><a href="global.html#redoChangesToTaskForm">redoChangesToTaskForm</a></li><li><a href="global.html#removeBorderColorBlue">removeBorderColorBlue</a></li><li><a href="global.html#removeError">removeError</a></li><li><a href="global.html#removeHighlight">removeHighlight</a></li><li><a href="global.html#removeHighlightAreas">removeHighlightAreas</a></li><li><a href="global.html#removeLowPrio">removeLowPrio</a></li><li><a href="global.html#removeMediumPrio">removeMediumPrio</a></li><li><a href="global.html#removeUrgentPrio">removeUrgentPrio</a></li><li><a href="global.html#renderAllOrMatchingTodos">renderAllOrMatchingTodos</a></li><li><a href="global.html#renderCategories">renderCategories</a></li><li><a href="global.html#renderContactUnderStartingLetter">renderContactUnderStartingLetter</a></li><li><a href="global.html#renderContactsToAssign">renderContactsToAssign</a></li><li><a href="global.html#renderContactsToAssignWithemptyCheckbox">renderContactsToAssignWithemptyCheckbox</a></li><li><a href="global.html#renderError">renderError</a></li><li><a href="global.html#renderErrorOrAddContact">renderErrorOrAddContact</a></li><li><a href="global.html#renderErrorOrMatchingDodos">renderErrorOrMatchingDodos</a></li><li><a href="global.html#renderSubtasks">renderSubtasks</a></li><li><a href="global.html#renewSubtasks">renewSubtasks</a></li><li><a href="global.html#resetLogInForm">resetLogInForm</a></li><li><a href="global.html#resetSignUpForm">resetSignUpForm</a></li><li><a href="global.html#saveInitialsInLocalStorage">saveInitialsInLocalStorage</a></li><li><a href="global.html#saveInitialsInLocalStorageLogIn">saveInitialsInLocalStorageLogIn</a></li><li><a href="global.html#saveInputValue">saveInputValue</a></li><li><a href="global.html#saveLogInLocalStorage">saveLogInLocalStorage</a></li><li><a href="global.html#saveNameAInLocalStorage">saveNameAInLocalStorage</a></li><li><a href="global.html#saveNameAInLocalStorageLogIn">saveNameAInLocalStorageLogIn</a></li><li><a href="global.html#saveTaskChanges">saveTaskChanges</a></li><li><a href="global.html#selectAssignedContact">selectAssignedContact</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#setItem">setItem</a></li><li><a href="global.html#setModalSizeAndPosition">setModalSizeAndPosition</a></li><li><a href="global.html#setPrioButton">setPrioButton</a></li><li><a href="global.html#setPrioLow">setPrioLow</a></li><li><a href="global.html#setPrioMedium">setPrioMedium</a></li><li><a href="global.html#setPrioUrgent">setPrioUrgent</a></li><li><a href="global.html#showAllTasks">showAllTasks</a></li><li><a href="global.html#showAssignedtoContacts">showAssignedtoContacts</a></li><li><a href="global.html#showAwaitFeedback">showAwaitFeedback</a></li><li><a href="global.html#showDone">showDone</a></li><li><a href="global.html#showIconsSubtasks">showIconsSubtasks</a></li><li><a href="global.html#showInProgress">showInProgress</a></li><li><a href="global.html#showLeftSection">showLeftSection</a></li><li><a href="global.html#showNavHeader">showNavHeader</a></li><li><a href="global.html#showPenAndTrash">showPenAndTrash</a></li><li><a href="global.html#showSnackbar">showSnackbar</a></li><li><a href="global.html#showSnackbarAddTasks">showSnackbarAddTasks</a></li><li><a href="global.html#showSnackbarBoard">showSnackbarBoard</a></li><li><a href="global.html#showToDo">showToDo</a></li><li><a href="global.html#showTrashAndCheck">showTrashAndCheck</a></li><li><a href="global.html#showUrgentTaskDate">showUrgentTaskDate</a></li><li><a href="global.html#showUrgentTasks">showUrgentTasks</a></li><li><a href="global.html#signUpSuccessfullyInfo">signUpSuccessfullyInfo</a></li><li><a href="global.html#sortContactsByName">sortContactsByName</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#stopPropagation">stopPropagation</a></li><li><a href="global.html#storeAllTasks">storeAllTasks</a></li><li><a href="global.html#storeAllTasksBoard">storeAllTasksBoard</a></li><li><a href="global.html#storeAllTasksContacts">storeAllTasksContacts</a></li><li><a href="global.html#storeAllUsers">storeAllUsers</a></li><li><a href="global.html#storeContacts">storeContacts</a></li><li><a href="global.html#toggleActiveContact">toggleActiveContact</a></li><li><a href="global.html#toggleCheckbox">toggleCheckbox</a></li><li><a href="global.html#toggleDropdownAssignedTo">toggleDropdownAssignedTo</a></li><li><a href="global.html#toggleDropdownCategory">toggleDropdownCategory</a></li><li><a href="global.html#turnBlack">turnBlack</a></li><li><a href="global.html#turnBlue">turnBlue</a></li><li><a href="global.html#turnDateColorBlack">turnDateColorBlack</a></li><li><a href="global.html#turnDateColorGrey">turnDateColorGrey</a></li><li><a href="global.html#unlogAllSidebarLinks">unlogAllSidebarLinks</a></li><li><a href="global.html#updateArea">updateArea</a></li><li><a href="global.html#updateHTML">updateHTML</a></li><li><a href="global.html#validatePassword">validatePassword</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Thu Apr 25 2024 16:50:46 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

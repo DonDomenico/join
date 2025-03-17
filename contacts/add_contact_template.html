@@ -1,0 +1,37 @@
+<div class="modal-bg" id="modal-bg-add">
+    <div class="add-contact-modal" id="modal-content">
+      <div class="left-side-modal">
+        <img class="left-side-modal-img" src="../assets/img/icons/logo_white.png" alt="">
+        <div class="slogan">
+          <h2>Add contact</h2>
+          <p class="p_add_contact">Tasks are better with a team</p>
+          <img src="../assets/img/line.png" alt="">
+        </div>
+      </div>
+      <div class="right-side-modal">
+        <span class="close-modal" onclick="closeAddContact()">&times;</span>
+        <div class="image_and_form">
+          <img class="contact_person_image" src="../assets/img/contacts_person.png" alt="">
+          <div class="form_container">
+            <form autocomplete="off" class="add-contact-form" id="add-contact-form" onsubmit="event.preventDefault(); renderErrorOrAddContact('errorContainerContacts')">
+              <div class="contact_input_container">
+                <input onkeyup="checkIfInputHasValue()" class="newContactName" type="text" name="name" id="name-input" placeholder="Name">
+                <input class="newContactEmail" type="email" name="email" id="mail-input" placeholder="Email">
+              </div>
+              <div class="cancel-and-create-buttons">
+              <button class="btn_bright" type="button" onclick="closeAddContact()" onmouseover="turnBlue('cancelIcon', 'addTask_x_bright.png')" onmouseleave="turnBlack('cancelIcon', 'addTask_x_dark.png')">Cancel
+                <img id="cancelIcon" src="../assets/img/icons/addTask_x_dark.png" alt="">
+              </button>
+              <button class="btn_dark" type="submit">Create contact
+                <img src="../assets/img/icons/white_check.svg" alt="">
+              </button>
+              </div>
+              <div id="errorContainerContacts">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

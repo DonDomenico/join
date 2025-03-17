@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+    <title>Add Task</title>
+    <link rel="stylesheet" href="./add_task.css" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/templates/header_and_sidebar.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+    <script src="./add_tasks.js"></script>
+    <script src="./add_task_help_functions.js"></script>
+    <script src="./add_task_subtasks.js"></script>
+    <script src="../storage.js"></script>
+  </head>
+  <body onload="init()">
+    <div cl w3-include-html="../assets/templates/sidebar.html"></div>
+    <div class="header_and_main">
+      <div class="header_container" cl w3-include-html="../assets/templates/header.html"></div>
+      <main class="add_task_main">
+        <div class="include_html_container" w3-include-html="./add_task_template.html"></div>
+      </main>
+    </div>
+    <script src="../assets/templates/include_header_and_sidebar.js"></script>
+    <script src="../contacts/contacts.js"></script>
+    <script src="../assets/templates/header.js"></script>
+  </body>
+</html>

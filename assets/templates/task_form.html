@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board</title>
+    <script src=""></script>
+    <!-- Todo: Script verlinken -->
+  </head>
+  <body onload="loadAllTasks()">
+    <h1>Task Manager</h1>
+    <form onsubmit="addTask()">
+      <input required type="text" placeholder="Title" id="description" />
+      <select required placeholder="Category" id="category">
+        <option>Technical Task</option>
+        <option>User Story</option>
+      </select>
+      <button>Add task</button>
+    </form>
+  </body>
+</html>

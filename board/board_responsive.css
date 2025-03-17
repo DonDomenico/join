@@ -1,0 +1,293 @@
+.area-title {
+  margin-bottom: 24px;
+}
+
+.modal-content {
+  border-radius: 32px;
+}
+
+main {
+  max-width: 1080px;
+}
+
+@media (max-width: 1540px) {
+  main {
+    margin: 120px 40px 40px 40px !important;
+  }
+}
+
+@media (max-width: 1400px) {
+  .drag-area {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .area-title {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .subtask-progress {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 1200px) {
+  /* START resonsive footer and header - earlier than in any other page */
+  /* header */
+  .join_description {
+    display: none;
+  }
+
+  .help_icon {
+    display: none;
+  }
+
+  .header_and_main {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  html,
+  body {
+    height: 100%;
+  }
+
+  body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    width: 100%;
+    height: 80px;
+  }
+
+  body {
+    flex-direction: column;
+  }
+
+  .mobile_footer_container {
+    height: 80px;
+  }
+
+  .logo_mobile {
+    display: block;
+    width: 32px;
+    height: 40px;
+  }
+
+  /* footer/sidebar */
+  .sidebar {
+    bottom: 0;
+    width: 100%;
+    min-height: 80px;
+    height: 80px;
+    flex-direction: row;
+    top: auto;
+    left: auto;
+    align-items: center;
+  }
+
+  .include_html_container {
+    margin-bottom: 96px;
+  }
+
+  main {
+    height: auto;
+  }
+
+  .menu_sidebar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+
+  .logo_and_menu_container {
+    flex-direction: row;
+    width: 100%;
+    height: auto;
+  }
+
+  .container_logo_sidebar {
+    display: none;
+  }
+
+  .legal_sidebar_container {
+    display: none;
+  }
+
+  .link_sidebar {
+    flex-direction: column;
+  }
+
+  .sidebar_menu_img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .link_sidebar {
+    gap: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    width: 76px;
+    height: 76px;
+    border-radius: 16px;
+  }
+
+  .p_sidebar {
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+
+  /* END resonsive footer and header - earlier than in any other page */
+}
+
+@media (max-width: 940px) {
+  .drag-areas {
+    flex-direction: column;
+    margin-bottom: 96px;
+  }
+
+  .drag-area {
+    flex-direction: row;
+    margin-bottom: 24px;
+    width: 100%;
+    overflow-y: auto;
+    align-items: flex-start;
+    padding-bottom: 0;
+    overflow-x: scroll;
+    /* 
+    overflow-x: scroll;
+    Könnte verhindert werden durch:display:
+    ::-webkit-scrollbar {
+      width: 0px !important;
+    }; */
+  }
+
+  .title-and-searchfield {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .searchfield {
+    width: 100%;
+    margin-bottom: 32px;
+    background-color: white;
+  }
+
+  .search-and-errorContainer {
+    width: 100%;
+  }
+
+  h1 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-top: 16px;
+    margin-bottom: 56px;
+  }
+
+  .add-button {
+    display: block;
+    z-index: 2;
+    position: absolute;
+    top: 122px;
+    right: 40px;
+    border-radius: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: #2a3647;
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0;
+    padding-block: 0;
+    padding-inline: 0;
+  }
+
+  .add-button-text {
+    display: none;
+  }
+
+  .btn_dark {
+    min-width: 0;
+  }
+
+  .area-title {
+    padding: 0;
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .task {
+    box-sizing: border-box;
+    min-width: 200px;
+    max-width: 200px;
+    max-height: 300px;
+    box-shadow: 0 0 0 0 white;
+    border: 1px solid rgb(236, 233, 233);
+  }
+
+  ::-webkit-scrollbar {
+    height: 0px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #a8a8a8;
+    border-radius: 8px;
+  }
+
+  .add-button {
+    z-index: 1;
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  .modal-content {
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 750px) {
+  main {
+    margin: 100px 16px 16px 16px !important;
+  }
+
+  .edit-and-delete-buttons {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .tiny_line_board {
+    display: none;
+  }
+
+  .edit-and-delete-buttons button {
+    padding-right: 0;
+  }
+
+  .task-details {
+    padding: 16px 16px 48px 16px;
+    height: 65vh;
+    width: 65%;
+  }
+
+  .details-h1 {
+    margin-bottom: 16px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+}

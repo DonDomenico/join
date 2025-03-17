@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/templates/header_and_sidebar.css" />
+    <link rel="stylesheet" href="contacts.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png">
+    <script src="contacts.js"></script>
+    <script src="add_contact.js"></script>
+    <script src="edit_contact.js"></script>
+    <script src="../storage.js"></script>
+    <!-- <script src="../assets/templates/header.js"></script> -->
+    <title>Contacts</title>
+  </head>
+  <body onload="initContacts()">
+    <div cl w3-include-html="../assets/templates/sidebar.html"></div>
+    <div class="header_and_main">
+      <div class="header_container" cl w3-include-html="../assets/templates/header.html"></div>
+      <main>
+        <button id="backButtonContacts" onclick="showLeftSection()" class="floating_button_mobile_back d_none"></button>
+        <div class="contacts_main">
+          <section id="leftSection" class="left_section">
+            <div class="contact_button_container">
+              <button class="btn_dark_disabled contacts_button" onclick="openAddContact()">Add new contact <img src="../assets/img/icons/person_add.png" alt="" /></button>
+            </div>
+            <div class="all-contacts" id="all-contacts"></div>
+          </section>
+          <section id="rightSection" class="right_section">
+            <div class="headline_container">
+              <h1>Contacts</h1>
+              <div class="line_and_span_container"><img class="vertical_blue_line" src="../assets/img/contacts_blue_line.png" alt="" />
+              <hr class="horizontal_blue_line">
+              <span>Better with a team</span></div>
+            </div>
+            <div class="initials_and_name_container" id="contact-container"></div>
+            <div class="contact-information" id="contact-information"></div>
+          </section>
+        </div>
+        <button id="personButtonContacts" class="floating_button_mobile_contacts" type="button" onclick="openAddContact()"></button>
+        <button id="threeDotsButtonContacts" class="floating_button_three_dots d_none" type="button" onclick="openEditDeleteMenu()"></button>
+      </main>
+      <div w3-include-html="add_contact_template.html"></div>
+      <div w3-include-html="edit_contact_template.html"></div>
+      <div id="snackbar" class="snackbar"></div>
+    <script src="../assets/templates/include_header_and_sidebar.js"></script>
+    <script src="../assets/templates/header.js"></script>
+  </body>
+</html>

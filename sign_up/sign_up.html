@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Sign up</title>
+    
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="sign_up.css" />
+    <link rel="stylesheet" href="../login/login.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+  </head>
+  <body onload="initUser()">
+    <div class="container_main_signUp">
+    <div class="login_header">
+      <img class="logo_join" src="../assets/img/logo.png" alt="logo_join" />
+    </div>
+    <section class="login_section">
+      <div class="sign_up_container">
+        <form id="signUpForm" class="login_form"  onsubmit="addUser(); return false;">
+          <div class="login_form_head">
+            <img class="arrow" src="../assets/img/icons/arrow_left.png" alt="go to login" onclick="window.location.href = '../index.html';"/>
+            <h1>Sign up</h1>
+            <img src="../assets/img/line.png" alt="line" />
+          </div>
+
+          <div class="login_input">
+            <input onkeyup="disOrEnableSignUpBtn()" required type="text" minlength="3" id="username" placeholder="Name" class="icon_person"/>
+            <input onkeyup="disOrEnableSignUpBtn()" required type="email" id="email" placeholder="Email" class="icon_mail"/>
+            <input onkeyup="disOrEnableSignUpBtn()" required type="password" minlength="3" id="password" placeholder="Password" class="icon_lock"/>
+            <input onkeyup="disOrEnableSignUpBtn()" onkeydown="removeErrorMessage()" required type="password" minlength="3" id="password_confirm" placeholder="Confirm Password" class="icon_lock"/>
+          </div>
+
+          <div class="login_remember_me">
+            <input type="image" src="../assets/img/icons/check_box_empty.png" id="accept_policy" onclick="checkBox(); return false;"/>
+            <label for="accept_policy">I accept the <a class="text_blue" href="../privacy_policy/privacy_policy_guest.html" target="_blank">Privacy Policy</a></label>
+          </div>
+
+          <div id="error-message-container" style="display: none;"></div>
+
+          <div class="login_btns">
+            <button disabled class="btn_dark_disabled" id="registerBtn" type="submit">Sign up</button>
+          </div>
+        </form>
+    </section>
+
+    <div class="login_footer">
+      <a href="../privacy_policy/privacy_policy_guest.html" target="_blank">Privacy Policy</a>
+      <a href="../legal_notice/legal_notice_guest.html" target="_blank">Legal notice</a>
+    </div>
+
+    <div id="snackbarSignUp" class="snackbarSignUp"></div>
+  </div>
+  </body>
+
+  <script src="sign_up.js"></script>
+  <script src="../storage.js"></script>
+</html>

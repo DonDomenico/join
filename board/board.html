@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Board</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="board.css">
+    <link rel="stylesheet" href="../assets/templates/header_and_sidebar.css" />
+    <link rel="stylesheet" href="../add_task/add_task.css">
+    <link rel="stylesheet" href="./board_responsive.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png">
+    
+    <script src="board.js"></script>
+    <script src="../storage.js"></script>
+    <script src="../add_task/add_tasks.js"></script>
+    <script src="../add_task/add_task_help_functions.js"></script>
+    <script src="../add_task/add_task_subtasks.js"></script>
+    <script src="../contacts/contacts.js"></script>
+    <script src="board_search.js"></script>
+    <script src="board_task_details.js"></script>
+    <script src="board_edit_task.js"></script>
+    <script id="DragDropTouch" src="https://bernardo-castilho.github.io/DragDropTouch/DragDropTouch.js"></script>
+</head>
+<body onload="includeHTML(); initBoard()" id="body">
+    <div cl w3-include-html="../assets/templates/sidebar.html"></div>
+    <div class="header_and_main">
+        <div class="header_container" cl w3-include-html="../assets/templates/header.html"></div>
+        <main>
+            <div class="board-header">
+                <div class="title-and-searchfield">
+                    <h1>Board</h1>
+                        <div class="search-and-errorContainer">
+                           <input onkeyup="renderAllOrMatchingTodos()" id="searchfield" class="searchfield" type="search" placeholder="Find task" name="q">
+                           <div id="errorContainer"></div>
+                        </div>   
+                        <button onclick="openAddTask()" class="btn_dark add-button"><span class="add-button-text">Add Task</span><img src="../assets/img/icons/add.png" alt=""></button>
+                </div>
+            </div>
+            <div class="drag-areas">
+                <div>
+                    <div class="area-title"><h3>To do</h3><button onclick="openAddTaskAndSetStatus('todo')" class="add-task-button"></button></div>
+                    <div class="drag-area" id="todo" ondrop="moveTo('todo'); removeHighlight('todo')" ondragleave="removeHighlight('todo')" ondragover="allowDrop(event); highlight('todo')"></div>
+                </div>
+                <div>
+                    <div class="area-title"><h3>In Progress</h3><button onclick="openAddTaskAndSetStatus('in-progress')" class="add-task-button"></div>
+                    <div class="drag-area" id="in-progress" ondrop="moveTo('in-progress'); removeHighlight('in-progress')" ondragleave="removeHighlight('in-progress')" ondragover="allowDrop(event); highlight('in-progress')"></div>
+                </div>
+                <div>
+                    <div class="area-title"><h3>Await Feedback</h3><button onclick="openAddTaskAndSetStatus('await-feedback')" class="add-task-button"></div>
+                        <div class="drag-area" id="await-feedback" ondrop="moveTo('await-feedback'); removeHighlight('await-feedback')" ondragleave="removeHighlight('await-feedback')" ondragover="allowDrop(event); highlight('await-feedback')"></div>
+                </div>
+                <div>
+                    <div class="area-title"><h3>Done</h3></div>
+                    <div class="drag-area" id="done" ondrop="moveTo('done'); removeHighlight('done')" ondragleave="removeHighlight('done')" ondragover="allowDrop(event); highlight('done')"></div>
+                </div>
+            </div>
+        </div>
+        <div id="modal-bg" class="modal-bg">
+            <div class="modal-content">
+                <span id="close-modal" class="close-modal" onclick="closeModal()">&times;</span>
+                <div w3-include-html="../add_task/add_task_template.html"></div>
+            </div>
+        </div>
+        <div id="modal-bg-details" class="modal-bg">
+            <div class="task-details" id="task-details"></div>
+        </div>
+        <div id="snackbar-board" class="snackbar"></div>
+    </main>
+
+    <script src="../assets/templates/include_header_and_sidebar.js"></script>
+    <script src="../assets/templates/header.js"></script>
+</body>
+</html>

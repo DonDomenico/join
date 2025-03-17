@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Start</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="login_animation.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png">
+  </head>
+  <body onload="initLogIn(); playIntro()">
+
+    <div id="whole" class="wholeSite">
+     
+        <img id="big" src="../assets/img/logoBig.svg" alt="logo_join" class="logoBig">
+ 
+    </div>
+
+    <div class="container_main">
+    <div class="login_header">
+      <!-- <img src="../assets/img/logoBig.svg" alt="logo_join" class="logoBigStart" /> -->
+      <div class="login_sign_up">
+        <p class="font_size_20">Not a Join user?</p>
+        <button class="btn_dark" onclick="window.location.href = '../sign_up/sign_up.html';">Sign up</button>
+      </div>
+    </div>
+
+    <section class="login_section">
+    <div class="login_container">
+      <form id="logInForm" class="login_form"  onsubmit="login(); return false;">
+        <div class="login_form_head">
+          <h1>Log in</h1>
+          <img src="../assets/img/line.png" alt="line">
+        </div>
+
+        <div class="login_input">
+          <input onkeyup="disOrEnableLogInBtn()" required type="email" id="email" placeholder="Email" class="icon_mail" onclick="loadRememberMe()" />
+          <input onkeyup="disOrEnableLogInBtn()" required type="password" minlength="3" id="password" placeholder="Password" class="icon_lock"/>
+          <div id="passwordError" style="display: none;"></div>
+          <div id="loginError" style="display: none;">Ups! please sign up!</div>
+        </div>
+
+        <div class="login_remember_me">
+        <input type="image" src="../assets/img/icons/check_box_empty.png" id="remember_me" onclick="checkBox();  return false;" />
+        <label for="remember_me">Remember me</label>
+        
+        </div>
+        <div class="login_btns">
+          <button disabled class="btn_dark_disabled" id="registerBtn" type="submit">Log in</button>
+          <button class="btn_bright" onclick="window.location.href = '../summary/summary.html';">Guest Log in</button>
+        </div>
+      </form>
+    </div>
+  </section>
+    <div class="login_footer">
+      <a href="../privacy_policy/privacy_policy.html">Privacy Policy</a>
+      <a href="../legal_notice/legal_notice.html">Legal notice</a></div>
+    </div>
+    <script src="login_intro.js"></script>
+    <script src="../storage.js"></script>
+    <script src="login.js"></script>
+  </body>
+</html>

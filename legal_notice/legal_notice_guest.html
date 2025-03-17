@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../assets/templates/header_and_sidebar.css" />
+    <link rel="stylesheet" href="legal_notice.css" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/logo.png" />
+    <title>Legal Notice</title>
+  </head>
+  <body onload="initLegalNotice()">
+    <div cl w3-include-html="../assets/templates/sidebar_no_nav.html"></div>
+    <div class="header_and_main">
+      <div class="header_container" cl w3-include-html="../assets/templates/header_no_dropdown.html"></div>
+      <main>
+        <img class="arrow_redirect" src="../assets/img/icons/arrow_left.png" alt="go to login" onclick="window.location.href = '/index.html';" />
+        <h1>Legal Notice</h1>
+        <div>
+          <h2>Imprint</h2>
+          <p>Dominik Grunow</p>
+          <p>Im alten Weiher 1</p>
+          <p>51570 Windeck</p>
+        </div>
+        <div>
+          <h3>Exploring the borad</h3>
+          <p>info@dominik-grunow.de</p>
+        </div>
+        <div>
+          <h3>Acceptance of terms</h3>
+          <p>
+            By accessing and using <a class="link_in_legals" href="">Join</a> (Product), you acknowledge and agree to the following terms and conditions, and any policies, guidelines, or amendments
+            thereto that may be presented to you from time to time. We, the listed students, may update or change the terms and conditions from time to time without notice.
+          </p>
+        </div>
+        <div>
+          <h3>Scope and ownership of the product</h3>
+          <p>
+            <a class="link_in_legals" href="">Join</a> has been developed as part of a student group project in a web development bootcamp at the
+            <a class="link_in_legals" href="https://developerakademie.com/impressum/">Developer Akademie GmbH</a>. It has an educational purpose and is not intended for extensive personal &amp;
+            business usage. As such, we cannot guarantee consistent availability, reliability, accuracy, or any other aspect of quality regarding this Product.
+          </p>
+
+          <p>
+            The design of <a class="link_in_legals" href=""><a class="link_in_legals" href="">Join</a></a> is owned by the
+            <a class="link_in_legals" href="https://developerakademie.com/impressum/">Developer Akademie GmbH</a>. Unauthorized use, reproduction, modification, distribution, or replication of the
+            design is strictly prohibited.
+          </p>
+        </div>
+        <div>
+          <h3>Proprietary rights</h3>
+          <p>
+            Aside from the design owned by <a class="link_in_legals" href="https://developerakademie.com/impressum/">Developer Akademie GmbH</a>, we, the listed students, retain all proprietary rights
+            in <a class="link_in_legals" href=""><a class="link_in_legals" href="">Join</a></a
+            >, including any associated copyrighted material, trademarks, and other proprietary information.
+          </p>
+        </div>
+        <div>
+          <h3>Use of the product</h3>
+          <p>
+            <a class="link_in_legals" href="">Join</a> is intended to be used for lawful purposes only, in accordance with all applicable laws and regulations. Any use of
+            <a class="link_in_legals" href="">Join</a> for illegal activities, or to harass, harm, threaten, or intimidate another person, is strictly prohibited. You are solely responsible for your
+            interactions with other users of <a class="link_in_legals" href="">Join</a>.
+          </p>
+        </div>
+        <div>
+          <h3>Disclaimer of warranties and limitation of liability</h3>
+          <p>
+            <a class="link_in_legals" href="">Join</a> is provided "as is" without warranty of any kind, whether express or implied, including but not limited to the implied warranties of
+            merchantability, fitness for a particular purpose, and non-infringement. In no event will we, the listed students, or the Developer Akademie, be liable for any direct, indirect,
+            incidental, special, consequential or exemplary damages, including but not limited to, damages for loss of profits, goodwill, use, data, or other intangible losses, even if we have been
+            advised of the possibility of such damages, arising out of or in connection with the use or performance of <a class="link_in_legals" href="">Join</a>.
+          </p>
+        </div>
+        <div>
+          <h3>Indemnity</h3>
+          <p class="margin_bottom">
+            You agree to indemnify, defend and hold harmless us, the listed students, the Developer Akademie, and our affiliates, partners, officers, directors, agents, and employees, from and against
+            any claim, demand, loss, damage, cost, or liability (including reasonable legal fees) arising out of or relating to your use of <a class="link_in_legals" href="">Join</a> and/or your
+            breach of this Legal Notice. For any questions or notices, please contact us at info@dominik-grunow.de. Date: April 24, 2024
+          </p>
+        </div>
+      </main>
+    </div>
+    <script src="../assets/templates/include_header_and_sidebar.js"></script>
+    <script src="../assets/templates/header.js"></script>
+    <script>
+      async function initLegalNotice() {
+        await includeHTML();
+        unlogAllSidebarLinks();
+        logSidebarLink("legalSidebar");
+        await loadUserInitials();
+      }
+    </script>
+  </body>
+</html>
